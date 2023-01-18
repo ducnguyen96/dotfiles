@@ -1,0 +1,4 @@
+#!/bin/sh
+
+vnd_krw=$(curl -v --silent https://fx.service.sentbe.com/v1/global_rates -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHJhbnNmZXIiLCJyb2xlIjoidHJhbnNmZXIiLCJzYWx0IjoiWVQjdDQiLCJleHAiOjQ2NjY0MjEwMTJ9.sivUSmZDNkYPL-PTgoN8HrZKjUVE8pE_L5MqqA6cvxk' 2>&1 | grep -oP "vnd_krw\"\:\"\K([0-9]*\.[0-9]*)")
+echo $vnd_krw | awk '{printf ("💰: %2.0f", (1000/$vnd_krw))}'

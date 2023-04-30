@@ -15,7 +15,7 @@ core:
 	
 	# host
 	echo machine > /etc/hostname
-	echo "root:1" | passwd
+	passwd
 
 	# systemd
 	systemctl enable NetworkManager
@@ -37,7 +37,7 @@ wm:
 	yay -S xorg-server xorg-xinit awesome --noconfirm
 
 	# compositor
-	yay -S picom --noconfirm
+	yay -S picom-ibhagwan-git --noconfirm
 
 term:
 	# terminal
@@ -58,7 +58,7 @@ config:
 	just aur
 	just wm
 	just term
-	cp -r .config ~/
-	cp -r .xprofile ~/
-	cp -r .zprofile ~/
+	cp -r .config $HOME/
+	cp -r .xprofile $HOME/
+	cp -r .zprofile $HOME/
 	just shell

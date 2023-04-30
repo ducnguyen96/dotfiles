@@ -8,7 +8,7 @@
 !.zprofile
 
 !.config/awesome/
-!.config/awesome/*
+!.config/awesome/**
 
 !.config/x11/
 !.config/x11/*

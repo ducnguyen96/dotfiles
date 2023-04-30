@@ -41,7 +41,7 @@ wm:
 
 term:
 	# terminal
-	yay -S alacritty --noconfirm
+	yay -S kitty --noconfirm
 
 shell:
 	# shell
@@ -51,3 +51,6 @@ shell:
 
 	# zsh framework - zap
 	zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+
+vietnamese:
+	yay -S fcitx5-bamboo fcitx5-configtool fcitx5-gtk --noconfirm

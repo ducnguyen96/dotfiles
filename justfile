@@ -51,8 +51,9 @@ shell:
 	# zsh framework - zap
 	zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh | sed '/source "\$ZSHRC"/d') --branch release-v1
 
-vietnamese:
+apps:
 	yay -S fcitx5-bamboo fcitx5-configtool fcitx5-gtk --noconfirm
+	yay -S firefox imagemagick rofi feh nm-connection-editor xfce4-power-manager i3lock scrot ranger --noconfirm
 
 config:
 	just aur

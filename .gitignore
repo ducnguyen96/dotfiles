@@ -17,3 +17,6 @@
 !.config/shell/*
 !.config/zsh/
 !.config/zsh/.zshrc
+
+!.config/alacritty/
+!.config/alacritty/**

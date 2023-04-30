@@ -32,17 +32,18 @@ function rules.create(clientkeys, clientbuttons)
 
    if beautiful.name == "mirage" then
       rofi_rule = {
-         rule_any = {name = {"rofi"}},
-         properties = {floating = true, titlebars_enabled = false},
+         rule_any = { name = { "rofi" } },
+         properties = { floating = true, titlebars_enabled = false },
          callback = function(c)
             if beautiful.name == "mirage" then
                awful.placement.left(c)
             end
          end
       }
-   else rofi_rule = {
-         rule_any = {name = {"rofi"}},
-         properties = {maximized = true, floating = true, titlebars_enabled = false},
+   else
+      rofi_rule = {
+         rule_any = { name = { "rofi" } },
+         properties = { maximized = true, floating = true, titlebars_enabled = false },
       }
    end
 
@@ -83,7 +84,8 @@ function rules.create(clientkeys, clientbuttons)
             type = {
                "dialog"
             }
-         }, properties = {floating = true}
+         },
+         properties = { floating = true }
       },
 
       -- Fullscreen clients
@@ -92,7 +94,8 @@ function rules.create(clientkeys, clientbuttons)
             class = {
                "Terraria.bin.x86",
             },
-         }, properties = {fullscreen = true}
+         },
+         properties = { fullscreen = true }
       },
 
       -- "Switch to tag"
@@ -102,12 +105,13 @@ function rules.create(clientkeys, clientbuttons)
             class = {
                "Firefox"
             },
-         }, properties = {switchtotag = true}
+         },
+         properties = { switchtotag = true }
       },
 
       -- Visualizer
       {
-         rule_any = {name = {"cava"}},
+         rule_any = { name = { "cava" } },
          properties = {
             floating = true,
             maximized_horizontal = true,
@@ -119,7 +123,7 @@ function rules.create(clientkeys, clientbuttons)
             height = screen_height * 0.40,
             opacity = 0.6
          },
-         callback = function (c)
+         callback = function(c)
             decorations.hide(c)
             awful.placement.bottom(c)
          end
@@ -130,14 +134,14 @@ function rules.create(clientkeys, clientbuttons)
 
       -- File chooser dialog
       {
-         rule_any = {role = {"GtkFileChooserDialog"}},
-         properties = {floating = true, width = screen_width * 0.55, height = screen_height * 0.65}
+         rule_any = { role = { "GtkFileChooserDialog" } },
+         properties = { floating = true, width = screen_width * 0.55, height = screen_height * 0.65 }
       },
 
       -- Pavucontrol & Bluetooth Devices
       {
-         rule_any = {class = {"Pavucontrol"}, name = {"Bluetooth Devices"}},
-         properties = {floating = true, width = screen_width * 0.55, height = screen_height * 0.45}
+         rule_any = { class = { "Pavucontrol" }, name = { "Bluetooth Devices" } },
+         properties = { floating = true, width = screen_width * 0.55, height = screen_height * 0.45 }
       },
    }
 end

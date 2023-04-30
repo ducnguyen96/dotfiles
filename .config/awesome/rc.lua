@@ -18,7 +18,6 @@ local awful = require("awful")
 
 local themes = {
    "pastel", -- 1
-   "mirage"  -- 2
 }
 
 -- change this number to use the corresponding theme
@@ -27,8 +26,8 @@ local theme_config_dir = gears.filesystem.get_configuration_dir() .. "/configura
 
 -- define default apps (global variable so other components can access it)
 apps = {
-   network_manager = "", -- recommended: nm-connection-editor
-   power_manager = "", -- recommended: xfce4-power-manager
+   network_manager = "nm-connection-editor", -- recommended: nm-connection-editor
+   power_manager = "xfce4-power-manager",    -- recommended: xfce4-power-manager
    terminal = "alacritty",
    launcher = "rofi -normal-window -modi drun -show drun -theme " .. theme_config_dir .. "rofi.rasi",
    lock = "i3lock",
@@ -105,7 +104,7 @@ tag.connect_signal('property::layout', function(t)
 end)
 
 -- Signal function to execute when a new client appears.
-client.connect_signal("manage", function (c)
+client.connect_signal("manage", function(c)
    -- Set the window as a slave (put it at the end of others instead of setting it as master)
    if not awesome.startup then
       awful.client.setslave(c)
@@ -121,14 +120,18 @@ end)
 -- ===================================================================
 -- Client Focusing
 -- ===================================================================
-
+client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("unfocus", function(c)
+   c.border_color =
+       beautiful.border_normal
+end)
 
 -- Autofocus a new client when previously focused one is closed
 require("awful.autofocus")
 
 -- Focus clients under mouse
 client.connect_signal("mouse::enter", function(c)
-   c:emit_signal("request::activate", "mouse_enter", {raise = false})
+   c:emit_signal("request::activate", "mouse_enter", { raise = false })
 end)
 
 

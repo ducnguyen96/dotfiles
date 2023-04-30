@@ -48,9 +48,9 @@ theme.useless_gap = dpi(7)
 theme.gap_single_client = true
 
 -- Window Borders
-theme.border_width = dpi(0)
+theme.border_width = dpi(1)
 theme.border_normal = theme.bg_normal
-theme.border_focus = "#ff8a65"
+theme.border_focus = "#6c87cc"
 theme.border_marked = theme.fg_urgent
 
 -- Taglist
@@ -71,7 +71,7 @@ theme.tasklist_fg_urgent = theme.fg_urgent
 theme.tasklist_fg_normal = theme.fg_normal
 
 -- Panel Sizing
-theme.left_panel_width = dpi(55)
+theme.left_panel_width = dpi(40)
 theme.top_panel_height = dpi(26)
 
 -- Notification Sizing

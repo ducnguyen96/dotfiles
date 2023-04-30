@@ -5,9 +5,15 @@
 
 !.config/
 !.xprofile
+!.zprofile
 
 !.config/awesome/
 !.config/awesome/*
 
 !.config/x11/
 !.config/x11/*
+
+!.config/shell/
+!.config/shell/*
+!.config/zsh/
+!.config/zsh/.zshrc

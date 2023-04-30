@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+# Clean-up
+export XDG_CONFIG_HOME="$HOME/.config"
+export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# Start graphical server on user's current tty if not already running
+[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx "$XINITRC"

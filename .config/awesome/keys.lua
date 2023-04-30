@@ -553,6 +553,12 @@ keys.clientkeys = gears.table.join(
          move_client(c, "right")
       end
    ),
+   awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
+              {description = "move to screen", group = "client"}),
+   awful.key({ modkey }, ".", function () awful.screen.focus_relative( 1) end,
+              {description = "focus the next screen", group = "screen"}),
+   awful.key({ modkey }, ",", function () awful.screen.focus_relative(-1) end,
+              {description = "focus the previous screen", group = "screen"}),
 
    -- toggle fullscreen
    awful.key({ modkey }, "f",

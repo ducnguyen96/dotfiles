@@ -49,7 +49,7 @@ shell:
 	echo 1 | chsh -s $(which zsh)
 
 	# zsh framework - zap
-	zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+	zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh | sed '/source "\$ZSHRC"/d') --branch release-v1
 
 vietnamese:
 	yay -S fcitx5-bamboo fcitx5-configtool fcitx5-gtk --noconfirm

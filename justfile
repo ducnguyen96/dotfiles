@@ -41,7 +41,7 @@ wm:
 
 term:
 	# terminal
-	yay -S kitty --noconfirm
+	yay -S alacritty --noconfirm
 
 shell:
 	# shell

@@ -8,6 +8,10 @@ window:
     y: 5
   dynamic_padding: false
   opacity: 0.6
+
+key_bindings:
+  - { key: V,         mods: Control,                    action: ToggleViMode }
+
 # Import additional configuration files
 #
 # Imports are loaded in order, skipping all missing files, with the importing

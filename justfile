@@ -43,6 +43,9 @@ term:
 	# terminal
 	yay -S alacritty --noconfirm
 
+audio:
+	yay -S alsa-utils pulseaudio pulseaudio-alsa --noconfirm
+
 shell:
 	# shell
 	yay -S zsh --noconfirm
@@ -63,3 +66,13 @@ config:
 	ln -sf $HOME/.config/shell/profile $HOME/.zprofile
 	ln -sf $HOME/.config/x11/xprofile $HOME/.xprofile
 	just shell
+
+node-dev:
+	yay -S fnm-bin --noconfirm
+	echo y | fnm use v18.14.2
+	npm i -g yarn
+
+python-dev:
+	yay -S tk pyenv --noconfirm
+	pyenv install 3.8.7
+	pyenv global 3.8.7

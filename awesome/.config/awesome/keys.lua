@@ -167,6 +167,13 @@ keys.globalkeys = gears.table.join(
    awful.key({ modkey, }, "s", hotkeys_popup.show_help,
       { description = "show help", group = "awesome" }),
 
+   awful.key({}, "F4",
+      function()
+         awful.spawn(apps.terminal .. " -e pulsemixer")
+      end,
+      { description = "application launcher", group = "launcher" }
+   ),
+
    -- =========================================
    -- FUNCTION KEYS
    -- =========================================
@@ -186,19 +193,33 @@ keys.globalkeys = gears.table.join(
    ),
 
    -- ALSA volume control
-   awful.key({}, "XF86AudioRaiseVolume",
+   awful.key({}, "F7",
       function()
-         awful.spawn("amixer -D pulse sset Master 5%+", false)
+         awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%", false)
+         awesome.emit_signal("volume_change")
+      end,
+      { description = "volume up", group = "hotkeys" }
+   ),
+   awful.key({}, "F8",
+      function()
+         awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%", false)
          awesome.emit_signal("volume_change")
       end,
       { description = "volume up", group = "hotkeys" }
    ),
    awful.key({}, "XF86AudioLowerVolume",
       function()
-         awful.spawn("amixer -D pulse sset Master 5%-", false)
+         awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%", false)
          awesome.emit_signal("volume_change")
       end,
       { description = "volume down", group = "hotkeys" }
+   ),
+   awful.key({}, "XF86AudioRaiseVolume",
+      function()
+         awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%", false)
+         awesome.emit_signal("volume_change")
+      end,
+      { description = "volume up", group = "hotkeys" }
    ),
    awful.key({}, "XF86AudioMute",
       function()
@@ -553,12 +574,12 @@ keys.clientkeys = gears.table.join(
          move_client(c, "right")
       end
    ),
-   awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "client"}),
-   awful.key({ modkey }, ".", function () awful.screen.focus_relative( 1) end,
-              {description = "focus the next screen", group = "screen"}),
-   awful.key({ modkey }, ",", function () awful.screen.focus_relative(-1) end,
-              {description = "focus the previous screen", group = "screen"}),
+   awful.key({ modkey, }, "o", function(c) c:move_to_screen() end,
+      { description = "move to screen", group = "client" }),
+   awful.key({ modkey }, ".", function() awful.screen.focus_relative(1) end,
+      { description = "focus the next screen", group = "screen" }),
+   awful.key({ modkey }, ",", function() awful.screen.focus_relative(-1) end,
+      { description = "focus the previous screen", group = "screen" }),
 
    -- toggle fullscreen
    awful.key({ modkey }, "f",

@@ -31,7 +31,7 @@ apps = {
    terminal = "alacritty",
    launcher = "rofi -normal-window -modi drun -show drun -theme " .. theme_config_dir .. "rofi.rasi",
    lock = "i3lock",
-   screenshot = "scrot -e 'mv $f ~/Pictures/ 2>/dev/null'",
+   screenshot = "scrot -e 'mv $f ~/Pictures/ 2>/dev/null' -s",
    filebrowser = "nautilus"
 }
 
@@ -44,7 +44,7 @@ network_interfaces = {
 
 -- List of apps to run on start-up
 local run_on_start_up = {
-   "picom --experimental-backends --config " .. theme_config_dir .. "picom.conf",
+   -- "picom --experimental-backends --config " .. theme_config_dir .. "picom.conf",
    "redshift",
    "unclutter",
    "xrandr --output DP-4 --rotate left",

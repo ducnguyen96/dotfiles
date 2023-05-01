@@ -166,13 +166,21 @@ keys.globalkeys = gears.table.join(
    ),
    awful.key({ modkey, }, "s", hotkeys_popup.show_help,
       { description = "show help", group = "awesome" }),
-
+   -- launch pulsemixer
    awful.key({}, "F4",
       function()
          awful.spawn(apps.terminal .. " -e pulsemixer")
       end,
       { description = "application launcher", group = "launcher" }
    ),
+   -- launch ranger
+   awful.key({ modkey }, "r",
+      function()
+         awful.spawn(apps.terminal .. " -e ranger")
+      end,
+      { description = "application launcher", group = "launcher" }
+   ),
+
 
    -- =========================================
    -- FUNCTION KEYS

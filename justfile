@@ -2,7 +2,7 @@ default:
 	just --list
 
 core:
-	pacman -Sy networkmanager--noconfirm
+	pacman -Sy networkmanager --noconfirm
 	
 	# time
 	ln -sf /usr/share/zoneInfo/Asia/Ho_Chi_Minh /etc/localtime
@@ -34,7 +34,7 @@ aur:
 
 wm:
 	# window manager
-	yay -S xorg-server xorg-xinit awesome --noconfirm
+	yay -S xorg-server xorg-xinit xorg-xrandr awesome --noconfirm
 
 	# compositor
 	yay -S picom-ibhagwan-git --noconfirm
@@ -44,9 +44,9 @@ term:
 	yay -S alacritty --noconfirm
 
 audio:
-	yay -S alsa-utils pulseaudio pulseaudio-alsa --noconfirm
+	yay -S pipewire pipewire-pulse pulseaudio pulsemixser --noconfirm
 
-shell:
+shell:	
 	# shell
 	yay -S zsh starship ttf-meslo-nerd-font-powerlevel10k --noconfirm
 	echo 1 | chsh -s $(which zsh)

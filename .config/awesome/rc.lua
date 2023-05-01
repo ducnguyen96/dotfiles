@@ -46,7 +46,8 @@ network_interfaces = {
 local run_on_start_up = {
    "picom --experimental-backends --config " .. theme_config_dir .. "picom.conf",
    "redshift",
-   "unclutter"
+   "unclutter",
+   "xrandr --output DP-4 --rotate left"
 }
 
 

@@ -2,7 +2,7 @@ default:
 	just --list
 
 core:
-	pacman -Sy networkmanager sudo nano vi git --noconfirm
+	pacman -Sy networkmanager--noconfirm
 	
 	# time
 	ln -sf /usr/share/zoneInfo/Asia/Ho_Chi_Minh /etc/localtime
@@ -59,7 +59,7 @@ config:
 	just aur
 	just wm
 	just term
-	cp -r .config $HOME/
-	cp -r .xprofile $HOME/
-	cp -r .zprofile $HOME/
+	stow */
+	ln -sf $HOME/.config/shell/profile $HOME/.zprofile
+	ln -sf $HOME/.config/x11/xprofile $HOME/.xprofile
 	just shell

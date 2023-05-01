@@ -48,7 +48,7 @@ audio:
 
 shell:
 	# shell
-	yay -S zsh --noconfirm
+	yay -S zsh starship ttf-meslo-nerd-font-powerlevel10k --noconfirm
 	echo 1 | chsh -s $(which zsh)
 
 	# zsh framework - zap
@@ -73,6 +73,10 @@ node-dev:
 	npm i -g yarn
 
 python-dev:
-	yay -S tk pyenv --noconfirm
+	yay -S tk pyenv zip terraform --noconfirm
 	pyenv install 3.8.7
 	pyenv global 3.8.7
+
+aws:
+	yay -S aws-cli-v2 authy --noconfirm
+	pip install awsume

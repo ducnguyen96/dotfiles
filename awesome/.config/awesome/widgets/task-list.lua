@@ -16,7 +16,7 @@ local gears = require('gears')
 local clickable_container = require('widgets.clickable-container')
 
 local dpi = require('beautiful').xresources.apply_dpi
-local capi = {button = button}
+local capi = { button = button }
 local ICON_DIR = gears.filesystem.get_configuration_dir() .. "/icons/"
 
 -- define module table
@@ -36,7 +36,7 @@ local function create_buttons(buttons, object)
          -- press and release events, and will propagate them to the
          -- button object the user provided, but with the object as
          -- argument.
-         local btn = capi.button {modifiers = b.modifiers, button = b.button}
+         local btn = capi.button { modifiers = b.modifiers, button = b.button }
          btn:connect_signal('press',
             function()
                b:emit_signal('press', object)
@@ -62,8 +62,8 @@ local function list_update(w, buttons, label, data, objects)
       local cache = data[o]
       local ib, cb, tb, cbm, bgb, tbm, ibm, tt, l, ll, bg_clickable
       if cache then
-         ib = cache.ib
-         tb = cache.tb
+         ib  = cache.ib
+         tb  = cache.tb
          bgb = cache.bgb
          tbm = cache.tbm
          ibm = cache.ibm
@@ -71,7 +71,8 @@ local function list_update(w, buttons, label, data, objects)
       else
          ib = wibox.widget.imagebox()
          tb = wibox.widget.textbox()
-         cb = clickable_container(wibox.container.margin(wibox.widget.imagebox(ICON_DIR .. "close.svg"), dpi(6), dpi(6), dpi(6), dpi(6)))
+         cb = clickable_container(wibox.container.margin(wibox.widget.imagebox(ICON_DIR .. "close.svg"), dpi(6), dpi(6),
+            dpi(6), dpi(6)))
          cb.shape = gears.shape.circle
          cbm = wibox.container.margin(cb, dpi(4), dpi(8), dpi(2), dpi(2)) -- 4, 8 ,12 ,12 -- close button
          cbm:buttons(gears.table.join(awful.button({}, 1, nil,
@@ -101,15 +102,15 @@ local function list_update(w, buttons, label, data, objects)
 
          -- Tooltip to display whole title, if it was truncated
          tt = awful.tooltip({
-            objects = {tb},
+            objects = { tb },
             mode = 'outside',
             align = 'bottom',
             delay_show = 1,
          })
 
          data[o] = {
-            ib = ib,
-            tb = tb,
+            ib  = ib,
+            tb  = tb,
             bgb = bgb,
             tbm = tbm,
             ibm = ibm,
@@ -124,7 +125,7 @@ local function list_update(w, buttons, label, data, objects)
       if text == nil or text == '' then
          tbm:set_margins(0)
       else
-          -- truncate when title is too long
+         -- truncate when title is too long
          local text_only = text:match('>(.-)<')
          if (text_only:len() > 24) then
             text = text:gsub('>(.-)<', '>' .. text_only:sub(1, 21) .. '...<')
@@ -143,11 +144,11 @@ local function list_update(w, buttons, label, data, objects)
          bg_image = bg_image(tb, o, nil, objects, i)
       end
       bgb:set_bgimage(bg_image)
-         if icon then
-            ib.image = icon
-         else
-            ibm:set_margins(0)
-         end
+      if icon then
+         ib.image = icon
+      else
+         ibm:set_margins(0)
+      end
 
       bgb.shape = args.shape
       bgb.shape_border_width = args.shape_border_width
@@ -169,16 +170,16 @@ local tasklist_buttons = awful.util.table.join(
          if c == client.focus then
             c.minimized = true
          else
-           -- Without this, the following
-           -- :isvisible() makes no sense
-           c.minimized = false
-           if not c:isvisible() and c.first_tag then
-              c.first_tag:view_only()
-           end
-           -- This will also un-minimize
-           -- the client, if needed
-           client.focus = c
-           c:raise()
+            -- Without this, the following
+            -- :isvisible() makes no sense
+            c.minimized = false
+            if not c:isvisible() and c.first_tag then
+               c.first_tag:view_only()
+            end
+            -- This will also un-minimize
+            -- the client, if needed
+            client.focus = c
+            c:raise()
          end
       end
    ),

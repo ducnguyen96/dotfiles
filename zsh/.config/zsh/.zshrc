@@ -3,8 +3,9 @@
 
 # source
 plug "$HOME/.config/zsh/exports.zsh"
+plug "$HOME/.config/zsh/aliases.zsh"
 
 plug "zsh-users/zsh-autosuggestions"
 plug "zap-zsh/supercharge"
-plug "zap-zsh/zap-prompt"
+plug "wintermi/zsh-starship"
 plug "zsh-users/zsh-syntax-highlighting"

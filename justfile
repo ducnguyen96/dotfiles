@@ -20,43 +20,42 @@ core:
 	# systemd
 	systemctl enable NetworkManager
 
-grub:
 	pacman -S grub efibootmgr
 	grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 	grub-mkconfig -o /boot/grub/grub.cfg
 
 mirrors:
-	sudo reflector
-	sudo reflector --latest 10 --sort rate --country singapore,china --save /etc/pacman.d/mirrorlist
+	# yay -Sy reflector rsync --noconfirm
+	sudo reflector --protocol https --country vietnam,singapore,thailand,japan,australia --latest 100 --download-timeout 1 --sort rate --save /etc/pacman.d/mirrorlist
 
 aur:
 	sudo pacman -S --needed --noconfirm git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm
 
 wm:
 	# window manager
-	yay -S xorg-server xorg-xinit xorg-xrandr awesome --noconfirm
+	yay -Sy xorg-server xorg-xinit xorg-xrandr awesome --noconfirm
 
 	# compositor
-	yay -S picom-ibhagwan-git --noconfirm
+	yay -Sy picom-ibhagwan-git --noconfirm
 
 term:
 	# terminal
-	yay -S alacritty --noconfirm
+	yay -Sy alacritty --noconfirm
 
 audio:
-	yay -S pipewire pipewire-pulse pulseaudio pulsemixser --noconfirm
+	yay -Sy pipewire pipewire-pulse pulseaudio pulsemixser --noconfirm
 
 shell:	
 	# shell
-	yay -S zsh starship ttf-meslo-nerd-font-powerlevel10k --noconfirm
+	yay -Sy zsh starship ttf-meslo-nerd-font-powerlevel10k --noconfirm
 	echo 1 | chsh -s $(which zsh)
 
 	# zsh framework - zap
 	zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh | sed '/source "\$ZSHRC"/d') --branch release-v1
 
 apps:
-	yay -S fcitx5-bamboo fcitx5-configtool fcitx5-gtk --noconfirm
-	yay -S firefox imagemagick rofi feh nm-connection-editor xfce4-power-manager i3lock scrot ranger --noconfirm
+	yay -Sy fcitx5-bamboo fcitx5-configtool fcitx5-gtk --noconfirm
+	yay -Sy firefox imagemagick rofi feh nm-connection-editor xfce4-power-manager i3lock scrot ranger --noconfirm
 
 config:
 	just aur
@@ -68,15 +67,15 @@ config:
 	just shell
 
 node-dev:
-	yay -S fnm-bin --noconfirm
-	echo y | fnm use v18.14.2
+	yay -Sy fnm-bin --noconfirm
+	fnm use v18.14.2
 	npm i -g yarn
 
 python-dev:
-	yay -S tk pyenv zip terraform --noconfirm
+	yay -Sy tk pyenv zip terraform --noconfirm
 	pyenv install 3.8.7
 	pyenv global 3.8.7
 
 aws:
-	yay -S aws-cli-v2 authy --noconfirm
+	yay -Sy aws-cli-v2 authy --noconfirm
 	pip install awsume

@@ -1,0 +1,10 @@
+alias \
+	bf="${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-files"	\
+	bd="${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs"
+
+
+alias \
+	cfv="$EDITOR ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim"	\
+	cfz="$EDITOR $ZDOTDIR/.zshrc" \
+	cfa="$EDITOR ${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"	\
+	cfp="$EDITOR ${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile"	 

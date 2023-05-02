@@ -38,7 +38,7 @@ shell:
 	rm -rf $HOME/.zshrc
 
 utils:
-	yay -Sy fcitx5-bamboo fcitx5-configtool fcitx5-gtk imagemagick rofi feh i3lock scrot ranger dragon-drop --noconfirm
+	yay -Sy openssh fcitx5-bamboo fcitx5-configtool fcitx5-gtk imagemagick rofi feh i3lock scrot ranger dragon-drop --noconfirm
 	rm -rf yay
 
 	# audio

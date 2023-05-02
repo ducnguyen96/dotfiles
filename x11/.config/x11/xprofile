@@ -1,6 +1,6 @@
 #!/bin/sh
 
-autostart="dunst pipewire"
+autostart="dunst"
 
 for program in $autostart; do
 	pidof -sx "$program" || "$program" &

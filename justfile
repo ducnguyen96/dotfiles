@@ -1,3 +1,5 @@
+hostname=machine
+
 default:
 	just --list
 
@@ -14,7 +16,7 @@ core:
 	echo "LANG=en_US.UTF-8" > /etc/locale.conf
 	
 	# host
-	echo machine > /etc/hostname
+	echo $hostname > /etc/hostname
 	passwd
 
 	# systemd
@@ -28,23 +30,6 @@ mirrors:
 	# yay -Sy reflector rsync --noconfirm
 	sudo reflector --protocol https --country vietnam,singapore,thailand,japan,australia --latest 100 --download-timeout 1 --sort rate --save /etc/pacman.d/mirrorlist
 
-aur:
-	sudo pacman -S --needed --noconfirm git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm
-
-wm:
-	# window manager
-	yay -Sy xorg-server xorg-xinit xorg-xrandr awesome --noconfirm
-
-	# compositor
-	yay -Sy picom-ibhagwan-git --noconfirm
-
-term:
-	# terminal
-	yay -Sy alacritty --noconfirm
-
-audio:
-	yay -Sy pipewire pipewire-pulse pulsemixser wireplumber --noconfirm
-
 shell:	
 	# shell
 	yay -Sy zsh starship ttf-meslo-nerd-font-powerlevel10k --noconfirm
@@ -53,18 +38,25 @@ shell:
 	# zsh framework - zap
 	zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh | sed '/source "\$ZSHRC"/d') --branch release-v1
 
-apps:
-	yay -Sy fcitx5-bamboo fcitx5-configtool fcitx5-gtk --noconfirm
-	yay -Sy firefox imagemagick rofi feh nm-connection-editor xfce4-power-manager i3lock scrot ranger dragon-drop --noconfirm
+utils:
+	yay -Sy fcitx5-bamboo fcitx5-configtool fcitx5-gtk firefox imagemagick rofi feh nm-connection-editor i3lock scrot ranger dragon-drop --noconfirm
+
+	yay -Sy pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber pulsemixer --noconfirm
+	systemctl --user enable --now pipewire.socket
+	systemctl --user enable --now pipewire-pulse.socket
+	systemctl --user enable --now wireplumber.service
 
 laptop:
 	yay -Sy bluez bluez-utils acpi  --noconfirm
 	sudo systemctl enable bluetooth.service
 
-config:
-	just aur
-	just wm
-	just term
+bootstrap:
+	# aur
+	sudo pacman -S --needed --noconfirm git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm
+
+	# wm + compositor + term
+	yay -Sy xorg-server xorg-xinit xorg-xrandr xclip awesome picom-ibhagwan-git alacritty --noconfirm
+
 	stow */
 	ln -sf $HOME/.config/shell/profile $HOME/.zprofile
 	ln -sf $HOME/.config/x11/xprofile $HOME/.xprofile

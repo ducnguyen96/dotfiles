@@ -43,7 +43,7 @@ term:
 	yay -Sy alacritty --noconfirm
 
 audio:
-	yay -Sy pipewire pipewire-pulse pulseaudio pulsemixser --noconfirm
+	yay -Sy pipewire pipewire-pulse pulsemixser wireplumber --noconfirm
 
 shell:	
 	# shell
@@ -55,7 +55,11 @@ shell:
 
 apps:
 	yay -Sy fcitx5-bamboo fcitx5-configtool fcitx5-gtk --noconfirm
-	yay -Sy firefox imagemagick rofi feh nm-connection-editor xfce4-power-manager i3lock scrot ranger --noconfirm
+	yay -Sy firefox imagemagick rofi feh nm-connection-editor xfce4-power-manager i3lock scrot ranger dragon-drop --noconfirm
+
+laptop:
+	yay -Sy bluez bluez-utils acpi  --noconfirm
+	sudo systemctl enable bluetooth.service
 
 config:
 	just aur

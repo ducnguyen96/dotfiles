@@ -57,10 +57,10 @@ widget_button:buttons(
 )
 -- Alternative to naughty.notify - tooltip. You can compare both and choose the preferred one
 local battery_popup = awful.tooltip({
-   objects = {widget_button},
+   objects = { widget_button },
    mode = "outside",
    align = "left",
-   referred_positions = {"right", "left", "top", "bottom"}
+   referred_positions = { "right", "left", "top", "bottom" }
 })
 
 local function show_battery_warning()
@@ -87,7 +87,7 @@ watch('bash -c \'acpi -i | grep -E "^Battery [0-9]+: ([^%]+%)$|(.+remaining)$|(.
       for s in stdout:gmatch("[^\r\n]+") do
          local status, charge_str, time = string.match(s, ".+: (%a+), (%d?%d?%d)%%,?.*")
          if status ~= nil then
-            table.insert(battery_info, {status = status, charge = tonumber(charge_str)})
+            table.insert(battery_info, { status = status, charge = tonumber(charge_str) })
          else
             local cap_str = string.match(s, ".+:.+last full capacity (%d+)")
             table.insert(capacities, tonumber(cap_str))

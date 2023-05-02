@@ -288,6 +288,8 @@ keys.globalkeys = gears.table.join(
       end,
       { description = "toggle exit screen", group = "hotkeys" }
    ),
+   awful.key({ modkey, "Shift" }, "q", function() awesome.quit() end,
+      { description = "exit awesome", group = "awesome" }),
 
    -- =========================================
    -- CLIENT FOCUSING

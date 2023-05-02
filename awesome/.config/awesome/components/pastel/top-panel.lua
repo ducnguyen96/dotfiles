@@ -13,11 +13,10 @@
 local awful = require("awful")
 local beautiful = require("beautiful")
 local wibox = require("wibox")
-local gears = require("gears")
 local dpi = beautiful.xresources.apply_dpi
 
 -- import widgets
-local task_list = require("widgets.task-list")
+local tag_list = require("widgets.tag-list")
 
 -- define module table
 local top_panel = {}
@@ -40,7 +39,7 @@ top_panel.create = function(s)
    panel:setup {
       expand = "none",
       layout = wibox.layout.align.horizontal,
-      task_list.create(s),
+      tag_list.create(s),
       require("widgets.calendar").create(s),
       {
          layout = wibox.layout.fixed.horizontal,
@@ -68,7 +67,6 @@ top_panel.create = function(s)
    -- connect panel visibility function to relevant signals
    client.connect_signal("property::fullscreen", change_panel_visibility)
    client.connect_signal("focus", change_panel_visibility)
-
 end
 
 return top_panel

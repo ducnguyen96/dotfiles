@@ -31,7 +31,8 @@ apps = {
    terminal = "alacritty",
    launcher = "rofi -normal-window -modi drun -show drun -theme " .. theme_config_dir .. "rofi.rasi",
    lock = "i3lock",
-   screenshot = "scrot -e 'mv $f ~/Pictures/ 2>/dev/null' -s",
+   screenshot =
+   "scrot -s '%Y-%m-%d_%H:%M:%S_$wx$h_scrot.png' -e 'xclip -selection clipboard -target image/png -i $f' ~/Pictures/",
    filebrowser = "nautilus"
 }
 

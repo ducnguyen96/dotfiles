@@ -171,14 +171,21 @@ keys.globalkeys = gears.table.join(
       function()
          awful.spawn(apps.terminal .. " -e pulsemixer")
       end,
-      { description = "application launcher", group = "launcher" }
+      { description = "open pulsemixer", group = "launcher" }
    ),
    -- launch ranger
    awful.key({ modkey }, "r",
       function()
          awful.spawn(apps.terminal .. " -e ranger")
       end,
-      { description = "application launcher", group = "launcher" }
+      { description = "open ranger", group = "launcher" }
+   ),
+   -- launch editor
+   awful.key({ modkey }, "e",
+      function()
+         awful.spawn(apps.terminal .. " -e " .. apps.editor)
+      end,
+      { description = "open editor", group = "launcher" }
    ),
 
 

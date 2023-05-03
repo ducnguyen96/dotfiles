@@ -5,13 +5,6 @@ import:
 window:
   dynamic_padding: false
   opacity: 0.75
-
-key_bindings:
-  - { key: V,         mods: Control,                                action: ToggleViMode }
-  - { key: H,         mods: Control,                                chars: "\x1bb"   }
-  - { key: Left,      mods: Control,                                chars: "\x1bb"   }
-  - { key: Right,     mods: Control,                                chars: "\x1bf"   }
-  - { key: Back,      mods: Control,                                chars: "\x1b\x7f" }
 # Import additional configuration files
 #
 # Imports are loaded in order, skipping all missing files, with the importing

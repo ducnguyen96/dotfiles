@@ -25,6 +25,11 @@ local checker
 -- Initialization
 -- ===================================================================
 
+-- check if bluetooth existed
+local f = io.popen("rfkill list bluetooth")
+if not f then return false end
+local s = f:read("*all")
+if not s or not string.match(s, "Soft blocked: no") then return false end
 
 local widget = wibox.widget {
    {
@@ -48,7 +53,7 @@ widget_button:buttons(
 
 awful.tooltip(
    {
-      objects = {widget_button},
+      objects = { widget_button },
       mode = "outside",
       align = "right",
       timer_function = function()
@@ -58,7 +63,7 @@ awful.tooltip(
             return "Bluetooth is off"
          end
       end,
-      preferred_positions = {"right", "left", "top", "bottom"}
+      preferred_positions = { "right", "left", "top", "bottom" }
    }
 )
 

@@ -20,6 +20,11 @@
 -- Initialization
 -- ===================================================================
 
+-- check if battery exist
+local acpi_output = io.popen("acpi -b 2>&1"):read("*a")
+if not string.find(acpi_output, "Battery") then return false end
+
+
 
 local awful = require("awful")
 local watch = require("awful.widget.watch")

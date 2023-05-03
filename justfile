@@ -39,7 +39,7 @@ shell:
 	rm -rf $HOME/.zshrc
 
 utils:
-	yay -Sy openssh fcitx5-bamboo fcitx5-configtool fcitx5-gtk imagemagick rofi feh i3lock scrot ranger dragon-drop --noconfirm
+	yay -Sy openssh fcitx5-bamboo fcitx5-configtool fcitx5-gtk imagemagick rofi feh acpi i3lock scrot ranger dragon-drop --noconfirm
 	rm -rf yay
 
 	# audio
@@ -49,7 +49,7 @@ utils:
 	systemctl --user enable --now wireplumber.service
 
 laptop:
-	yay -Sy bluez bluez-utils acpi  --noconfirm
+	yay -Sy bluez bluez-utils --noconfirm
 	sudo systemctl enable bluetooth.service
 
 bootstrap:

@@ -2,7 +2,7 @@ default:
 	just --list
 
 core:
-	pacman -Sy networkmanager --noconfirm
+	pacman -Sy networkmanager sof-firmware --noconfirm
 	
 	# time
 	ln -sf /usr/share/zoneInfo/Asia/Ho_Chi_Minh /etc/localtime
@@ -19,6 +19,7 @@ core:
 
 	# systemd
 	systemctl enable NetworkManager
+	systemctl disable NetworkManager-wait-online.service
 
 	pacman -S grub efibootmgr
 	grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB

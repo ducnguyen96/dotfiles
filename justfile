@@ -49,15 +49,17 @@ utils:
 	systemctl --user enable --now wireplumber.service
 
 laptop:
-	yay -Sy bluez bluez-utils --noconfirm
+	yay -Sy bluez bluez-utils blueman nm-connection-editor xfce4-power-manager --noconfirm
 	sudo systemctl enable bluetooth.service
+	sudo mkdir -p /etc/X11/xorg.conf.d/ && sudo cp -f ./etc/40-libinput.conf /etc/X11/xorg.conf.d/
 
 bootstrap:
 	# aur
 	sudo pacman -S --needed --noconfirm git stow base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm
 
 	# wm + compositor + term
-	yay -Sy xorg-server xorg-xinit xorg-xrandr xclip awesome picom-ibhagwan-git alacritty --noconfirm
+	yay -Sy xorg-server xorg-xinit xorg-xrandr xclip xf86-input-synaptics awesome picom-ibhagwan-git alacritty --noconfirm
+
 
 	stow */
 	ln -sf $HOME/.config/shell/profile $HOME/.zprofile

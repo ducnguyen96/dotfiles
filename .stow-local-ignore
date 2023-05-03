@@ -25,4 +25,5 @@ _darcs
 ^/LICENSE.*
 ^/COPYING
 
-yay
+yay/
+etc/

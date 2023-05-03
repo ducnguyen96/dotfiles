@@ -12,7 +12,7 @@
 local awful = require('awful')
 local wibox = require('wibox')
 local gears = require('gears')
-local naughty = require('naughty') 
+local naughty = require('naughty')
 local dpi = require('beautiful').xresources.apply_dpi
 local clickable_container = require('widgets.clickable-container')
 
@@ -22,7 +22,6 @@ local widget_icon_dir = config_dir .. 'icons/network/'
 local network_mode = nil
 
 local return_button = function()
-
 	local update_notify_no_access = true
 	local notify_no_access_quota = 0
 
@@ -48,7 +47,7 @@ local return_button = function()
 		},
 		widget = clickable_container
 	}
-	
+
 	widget_button:buttons(
 		gears.table.join(
 			awful.button({}, 1, nil,
@@ -61,10 +60,10 @@ local return_button = function()
 
 	local network_tooltip = awful.tooltip {
 		text = 'Loading...',
-		objects = {widget_button},
+		objects = { widget_button },
 		mode = 'outside',
 		align = 'right',
-		preferred_positions = {'left', 'right', 'top', 'bottom'},
+		preferred_positions = { 'left', 'right', 'top', 'bottom' },
 		margin_leftright = dpi(8),
 		margin_topbottom = dpi(8)
 	}
@@ -114,7 +113,6 @@ local return_button = function()
 
 	-- Wireless mode / Update
 	local update_wireless = function()
-
 		network_mode = 'wireless'
 
 		-- Create wireless connection notification
@@ -136,10 +134,10 @@ local return_button = function()
 					local essid = stdout:match('SSID: (.-)\n') or 'N/A'
 					local bitrate = stdout:match('tx bitrate: (.+/s)') or 'N/A'
 					local message = 'Connected to: <b>' .. (essid or 'Loading...*') ..
-						'</b>\nWireless Interface: <b>' .. network_interfaces.wlan ..
-						'</b>\nWiFi-Strength: <b>' .. tostring(wifi_strength) .. '%' ..
-						'</b>\nBit rate: <b>' .. tostring(bitrate) .. '</b>'
-					
+							'</b>\nWireless Interface: <b>' .. network_interfaces.wlan ..
+							'</b>\nWiFi-Strength: <b>' .. tostring(wifi_strength) .. '%' ..
+							'</b>\nBit rate: <b>' .. tostring(bitrate) .. '</b>'
+
 					if healthy then
 						update_tooltip(message)
 					else
@@ -174,7 +172,7 @@ local return_button = function()
 				end
 			)
 		end
-		
+
 		-- Get wifi strength
 		local update_wireless_strength = function()
 			awful.spawn.easy_async_with_shell(
@@ -197,7 +195,6 @@ local return_button = function()
 	end
 
 	local update_wired = function()
-
 		network_mode = 'wired'
 
 		local notify_connected = function()
@@ -211,9 +208,8 @@ local return_button = function()
 		awful.spawn.easy_async_with_shell(
 			check_internet_health,
 			function(stdout)
-
 				local widget_icon_name = 'wired'
-				
+
 				if stdout:match('Connected but no internet') then
 					widget_icon_name = widget_icon_name .. '-alert'
 					update_tooltip(
@@ -235,7 +231,6 @@ local return_button = function()
 	end
 
 	local update_disconnected = function()
-
 		local notify_wireless_disconnected = function(essid)
 			local message = 'Wi-Fi network has been disconnected'
 			local title = 'Connection Disconnected'
@@ -338,7 +333,7 @@ local return_button = function()
 		call_now = true,
 		callback = function()
 			check_network_mode()
-		end	
+		end
 	}
 
 	return widget_button

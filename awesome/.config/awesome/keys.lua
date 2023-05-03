@@ -238,7 +238,7 @@ keys.globalkeys = gears.table.join(
    ),
    awful.key({}, "XF86AudioMute",
       function()
-         awful.spawn("amixer -D pulse set Master 1+ toggle", false)
+         awful.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle", false)
          awesome.emit_signal("volume_change")
       end,
       { description = "toggle mute", group = "hotkeys" }

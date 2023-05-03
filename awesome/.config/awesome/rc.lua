@@ -40,7 +40,7 @@ apps = {
 -- define wireless and ethernet interface names for the network widget
 -- use `ip link` command to determine these
 network_interfaces = {
-   wlan = 'wlp1s0',
+   wlan = 'wlp0s20f3',
    lan = 'enp1s0'
 }
 

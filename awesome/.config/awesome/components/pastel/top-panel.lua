@@ -17,6 +17,7 @@ local dpi = beautiful.xresources.apply_dpi
 
 -- import widgets
 local tag_list = require("widgets.tag-list")
+local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 
 -- define module table
 local top_panel = {}
@@ -47,6 +48,7 @@ top_panel.create = function(s)
          require("widgets.bluetooth"),
          require("widgets.network")(),
          require("widgets.volume")(),
+         brightness_widget(),
          require("widgets.battery"),
          wibox.layout.margin(require("widgets.layout-box"), dpi(5), dpi(5), dpi(5), dpi(5))
       }

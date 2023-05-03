@@ -58,7 +58,7 @@ bootstrap:
 	sudo pacman -S --needed --noconfirm git stow base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm
 
 	# wm + compositor + term
-	yay -Sy xorg-server xorg-xinit xorg-xrandr xclip xf86-input-synaptics awesome picom-ibhagwan-git alacritty --noconfirm
+	yay -Sy xorg-server xorg-xinit xorg-xrandr xclip light xorg-xev xf86-input-synaptics awesome picom-ibhagwan-git alacritty --noconfirm
 
 
 	stow */

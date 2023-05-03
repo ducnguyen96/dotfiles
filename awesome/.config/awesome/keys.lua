@@ -28,6 +28,9 @@ local altkey = "Mod1"
 -- define module table
 local keys = {}
 
+-- import widgets
+local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
+
 
 -- ===================================================================
 -- Movement Functions (Called by some keybinds)
@@ -194,20 +197,20 @@ keys.globalkeys = gears.table.join(
    -- =========================================
 
    -- Brightness
-   awful.key({}, "XF86MonBrightnessUp",
-      function()
-         awful.spawn("xbacklight -inc 10", false)
+   awful.key({}, "XF86MonBrightnessUp", function()
+         brightness_widget:inc()
       end,
-      { description = "+10%", group = "hotkeys" }
-   ),
-   awful.key({}, "XF86MonBrightnessDown",
-      function()
-         awful.spawn("xbacklight -dec 10", false)
+      { description = "increase brightness", group = "custom" }),
+   awful.key({}, "XF86MonBrightnessDown", function() brightness_widget:dec() end,
+      { description = "decrease brightness", group = "custom" }),
+   awful.key({ modkey }, ";", function()
+         brightness_widget:inc()
       end,
-      { description = "-10%", group = "hotkeys" }
-   ),
+      { description = "increase brightness", group = "custom" }),
+   awful.key({ modkey, "Shift" }, ";", function() brightness_widget:dec() end,
+      { description = "decrease brightness", group = "custom" }),
 
-   -- ALSA volume control
+   -- Pipewire volume control
    awful.key({}, "F7",
       function()
          awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%", false)

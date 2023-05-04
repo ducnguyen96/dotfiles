@@ -1,6 +1,6 @@
 #!/bin/sh
 
-autostart="dunst blueman-applet"
+autostart="dunst"
 
 for program in $autostart; do
 	pidof -sx "$program" || "$program" &

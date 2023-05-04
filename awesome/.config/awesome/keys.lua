@@ -188,7 +188,7 @@ keys.globalkeys = gears.table.join(
       function()
          awful.spawn(apps.terminal .. " -e " .. apps.editor)
       end,
-      { description = "open editor", group = "launcher" }
+      { description = "open editor", group = "terminal" }
    ),
 
 

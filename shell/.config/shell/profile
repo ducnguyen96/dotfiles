@@ -2,7 +2,7 @@
 
 
 # Default programs:
-export EDITOR="nvim"
+export EDITOR="lvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 

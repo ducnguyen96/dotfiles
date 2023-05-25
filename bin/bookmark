@@ -1,0 +1,57 @@
+# Path to Firefox profiles directory
+firefox_profiles_path="$HOME/.mozilla/firefox/"
+
+search_bookmarks() {
+    bookmarks=()
+    
+    # Iterate over Firefox profiles
+    for profile_dir in "$firefox_profiles_path"*/ ; do
+        if [[ ! "${profile_dir}places.sqlite" ]]; then
+            continue
+        fi
+        
+        # Construct the places.sqlite path
+        places_path="${profile_dir}places.sqlite"
+
+        if [ -e "$places_path" ]; then
+            # Execute the query to fetch all bookmarks using sqlite3
+            query_result=$(sqlite3 -separator ' ' "$places_path" "SELECT b.title, p.url FROM moz_bookmarks AS b JOIN moz_places AS p ON b.fk = p.id WHERE b.type = 1")
+            
+            # Add the results to the bookmarks array
+            bookmarks+=("$query_result")
+        fi
+    done
+    
+    printf "%s\n" "${bookmarks[@]}"
+}
+
+open_url() {
+    url="$1"
+    # Open the URL in Firefox
+    firefox "$url" & exit 0
+}
+
+# Fetch all bookmarks
+bookmarks=$(search_bookmarks)
+
+if [ -z "$bookmarks" ]; 
+    then
+        bookmarks=$(cat /tmp/bookmarks.txt)
+    else 
+        echo "$bookmarks" > /tmp/bookmarks.txt
+fi
+
+# Prepare the menu items for rofi
+IFS=$'\n' read -rd '' -a menu_items <<< "$bookmarks"
+
+# Use rofi to display the menu and get the selected bookmark
+selected_index=$(printf "%s\n" "${menu_items[@]}" | rofi -dmenu -i -p "Bookmarks:" -format "i")
+
+if [ -n "$selected_index" ]; then
+    # Get the selected bookmark
+    selected_bookmark="${menu_items[$selected_index]}"
+    url=$(echo "$selected_bookmark" | awk '{print $NF}')
+    
+    # Open the URL in Firefox
+    open_url "$url"
+fi

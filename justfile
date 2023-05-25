@@ -56,6 +56,7 @@ laptop:
 bootstrap:
 	# aur
 	sudo pacman -S --needed --noconfirm git stow base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm
+	rm -rf yay
 
 	# wm + compositor + term
 	yay -Sy xorg-server xorg-xinit xorg-xrandr xclip light xorg-xev xf86-input-synaptics awesome picom-ibhagwan-git alacritty --noconfirm
@@ -64,6 +65,7 @@ bootstrap:
 	stow */
 	ln -sf $HOME/.config/shell/profile $HOME/.zprofile
 	ln -sf $HOME/.config/x11/xprofile $HOME/.xprofile
+	sudo ln -sf $HOME/dotfiles/bin/bookmark /usr/bin
 	just shell
 	rm  -rf $HOME/.bash*
 

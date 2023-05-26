@@ -15,3 +15,4 @@ if command -v pyenv >/dev/null 2>&1; then
 fi
 
 export PATH=$HOME/.fnm:$PATH
+export STARSHIP_CONFIG=$HOME/.config/starship.toml

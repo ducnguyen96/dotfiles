@@ -1,0 +1,24 @@
+scan_timeout = 10
+add_newline = false
+
+format = '''$git_branch$git_status
+$character'''
+
+right_format = '''$python$nodejs$terraform$aws'''
+
+
+[character]
+success_symbol = "[❯](bold green)"
+
+[aws]
+format = '[(aws-$profile)]($style)'
+style = 'bold cyan'
+
+[nodejs]
+format = '[node-$version](bold green) '
+
+[python]
+format = '[python-$version](bold green) '
+
+[terraform]
+format = '[tf-$version-$workspace]($style) '

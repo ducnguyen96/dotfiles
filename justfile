@@ -43,13 +43,13 @@ utils:
 	rm -rf yay
 
 	# audio
-	yay -Sy pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber pulsemixer --noconfirm
+	yay -Sy pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber pulsemixer alsa-utils --noconfirm
 	systemctl --user enable --now pipewire.socket
 	systemctl --user enable --now pipewire-pulse.socket
 	systemctl --user enable --now wireplumber.service
 
 laptop:
-	yay -Sy bluez bluez-utils blueman nm-connection-editor xfce4-power-manager --noconfirm
+	yay -Sy bluez bluez-utils blueman nm-connection-editor xfce4-power-manager brightnessctl --noconfirm
 	sudo systemctl enable bluetooth.service
 	sudo mkdir -p /etc/X11/xorg.conf.d/ && sudo cp -f ./etc/40-libinput.conf /etc/X11/xorg.conf.d/
 

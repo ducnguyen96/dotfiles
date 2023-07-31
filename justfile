@@ -39,7 +39,7 @@ shell:
 	rm -rf $HOME/.zshrc
 
 utils:
-	yay -Sy openssh fcitx5-bamboo fcitx5-configtool fcitx5-gtk imagemagick rofi feh acpi i3lock scrot ranger dragon-drop --noconfirm
+	yay -Sy fcitx5-bamboo fcitx5-configtool fcitx5-gtk imagemagick rofi feh acpi i3lock scrot ranger dragon-drop --noconfirm
 	rm -rf yay
 
 	# audio
@@ -55,11 +55,14 @@ laptop:
 
 bootstrap:
 	# aur
-	sudo pacman -S --needed --noconfirm git stow base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm
+	sudo pacman -S --needed --noconfirm git openssh usbutils stow base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm
 	rm -rf yay
 
 	# wm + compositor + term
 	yay -Sy xorg-server xorg-xinit xorg-xrandr xclip light xorg-xev xf86-input-synaptics awesome picom-ibhagwan-git alacritty --noconfirm
+
+	# wifi dongle driver
+	yay -Sy 8188eu-dkms
 
 
 	stow */

@@ -1,7 +1,9 @@
 ## Core
 
+```sh
 curl -LO https://raw.githubusercontent.com/ducnguyen96/dotfiles/master/justfile
 just core
+```
 
 ## Add user
 

@@ -48,11 +48,6 @@ utils:
 	systemctl --user enable --now pipewire-pulse.socket
 	systemctl --user enable --now wireplumber.service
 
-laptop:
-	yay -Sy bluez bluez-utils blueman nm-connection-editor xfce4-power-manager brightnessctl --noconfirm
-	sudo systemctl enable bluetooth.service
-	sudo mkdir -p /etc/X11/xorg.conf.d/ && sudo cp -f ./etc/40-libinput.conf /etc/X11/xorg.conf.d/
-
 bootstrap:
 	# aur
 	sudo pacman -S --needed --noconfirm git openssh usbutils stow base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm
@@ -64,6 +59,12 @@ bootstrap:
 	# wifi dongle driver
 	yay -Sy 8188eu-dkms
 
+	# bluetooth
+	yay -Sy bluez bluez-utils nm-connection-editor xfce4-power-manager brightnessctl --noconfirm
+	sudo systemctl enable bluetooth.service
+
+	# tap to click
+	sudo mkdir -p /etc/X11/xorg.conf.d/ && sudo cp -f ./etc/40-libinput.conf /etc/X11/xorg.conf.d/
 
 	stow */
 	ln -sf $HOME/.config/shell/profile $HOME/.zprofile
@@ -83,3 +84,14 @@ python-dev:
 aws:
 	yay -Sy aws-cli-v2 authy --noconfirm
 	pip install awsume
+
+docker:
+	sudo pacman -Sy docker
+	sudo systemctl enable docker.service
+	sudo usermod -aG docker $USER
+	newgrp docker
+
+virtualization:
+	sudo pacman -Sy virt-manager qemu-desktop dnsmasq iptables-nft
+	sudo systemctl enable	libvirtd.service
+	sudo systemctl start	libvirtd.service

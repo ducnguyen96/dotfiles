@@ -2,7 +2,7 @@
 
 
 # Default programs:
-export EDITOR="lvim"
+export EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 
@@ -16,6 +16,9 @@ export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc 
 export TFENV_CONFIG_DIR="$XDG_CONFIG_HOME/tfenv"
+
+# Use Go programs in $GOPATH/bin
+export PATH="$PATH:$(go env GOPATH)/bin"
 
 # Start graphical server on user's current tty if not already running
 [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx "$XINITRC"

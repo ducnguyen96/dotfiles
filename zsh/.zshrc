@@ -144,6 +144,7 @@ alias pc='sudo pacman -Sc' # remove unused cache
 alias po='pacman -Qtdq | sudo pacman -Rns -' # remove unused packages, also try > pacman -Qqd | pacman -Rsu --print -
 alias vc='code' # gui code editor
 alias D='cd ~/Downloads'
+alias awsume="source \$(pyenv which awsume)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -156,3 +157,17 @@ pokemon-colorscripts --no-title -r 1,3,6
 
 #Display random gifs
 # kitten icat --align left $(find $HOME/.config/neofetch/gifs/ -name "*.gif" | sort -R | head -1)
+
+if command -v fnm >/dev/null 2>&1; then
+  eval "$(fnm env)"
+fi
+
+if command -v pyenv >/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
+export PATH=$HOME/.fnm:$PATH
+export PATH=$HOME/.config/emacs/bin:$PATH
+export STARSHIP_CONFIG=$HOME/.config/starship.toml

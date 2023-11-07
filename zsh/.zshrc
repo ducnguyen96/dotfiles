@@ -74,6 +74,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     fzf-tab
+    zsh-vi-mode
 )
 source $ZSH/oh-my-zsh.sh
 
@@ -145,6 +146,7 @@ alias po='pacman -Qtdq | sudo pacman -Rns -' # remove unused packages, also try 
 alias vc='code' # gui code editor
 alias D='cd ~/Downloads'
 alias awsume="source \$(pyenv which awsume)"
+alias ssh="kitten ssh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

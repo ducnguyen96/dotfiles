@@ -74,7 +74,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     fzf-tab
-    zsh-vi-mode
+    # zsh-vi-mode
 )
 source $ZSH/oh-my-zsh.sh
 
@@ -155,7 +155,7 @@ alias ssh="kitten ssh"
 #neofetch
 
 #Display Pokemon
-pokemon-colorscripts --no-title -r 1,3,6
+# pokemon-colorscripts --no-title -r 1,3,6
 
 #Display random gifs
 # kitten icat --align left $(find $HOME/.config/neofetch/gifs/ -name "*.gif" | sort -R | head -1)

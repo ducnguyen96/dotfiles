@@ -14,5 +14,10 @@
     "terminal.explorerKind": "both",
     "terminal.sourceControlRepositoriesKind": "both",
     "telemetry.telemetryLevel": "off",
-    "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font Mono"
+    "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font Mono",
+    "editor.formatOnSave": true,
+    "prettier.configPath": "react-app/.prettierrc",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }

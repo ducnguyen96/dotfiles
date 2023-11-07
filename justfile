@@ -2,13 +2,13 @@ default:
 	just --list
 
 dependencies:
-    sudo pacman -S fzf
-    sudo git clone https://github.com/Aloxaf/fzf-tab $ZSH_CUSTOM/plugins/fzf-tab
+	sudo pacman -S fzf
+	sudo git clone https://github.com/Aloxaf/fzf-tab $ZSH_CUSTOM/plugins/fzf-tab
 	sudo git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH_CUSTOM/plugins/zsh-vi-mode
-    yay -Sy fcitx5-bamboo fcitx5-configtool fcitx5-gtk obs-studio pulsemixer baobab shellcheck shfmt less --noconfirm
+	yay -Sy fcitx5-bamboo fcitx5-configtool fcitx5-gtk obs-studio pulsemixer baobab shellcheck shfmt less --noconfirm
 
 config:
-    stow */
+	stow */
 
 node-dev:
 	yay -Sy fnm-bin --noconfirm

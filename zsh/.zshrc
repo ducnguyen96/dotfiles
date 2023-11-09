@@ -147,6 +147,8 @@ alias vc='code' # gui code editor
 alias D='cd ~/Downloads'
 alias awsume="source \$(pyenv which awsume)"
 alias ssh="kitten ssh"
+alias phpu="cd ~/Work/php/docker-php-wordpress && ./project up"
+alias phpd="cd ~/Work/php/docker-php-wordpress && ./project down"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -23,7 +23,7 @@ aws:
 	pip install awsume
 
 docker:
-	sudo pacman -Sy docker
+	sudo pacman -Sy docker docker-compose
 	sudo systemctl enable docker.service
 	sudo usermod -aG docker $USER
 	newgrp docker

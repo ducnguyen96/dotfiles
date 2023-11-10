@@ -11,6 +11,10 @@ gi.require_version('Gtk', '4.0')
 config_path = "/home/d/.config/switcher/switcherrc"
 
 
+def debug(val):
+    subprocess.check_output(['notify-send', f'{val}'])
+
+
 class Handler:
     def __init__(self, apps_box):
         self.apps_box = apps_box
@@ -70,6 +74,11 @@ class Handler:
                 title = title[:12] + '...'
             label.set_text(title)
             app.append(label)
+
+            # workspace
+            workspace = Gtk.Label()
+            workspace.set_text(f'({window["workspace"]["id"]})')
+            app.append(workspace)
 
             # app style
             if idx == self.config['index']:
@@ -152,6 +161,7 @@ class WindowSwitcher(Gtk.Application):
         self.win.present()
 
         apps_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        apps_box.set_size_request(100, 100)
         self.win.set_child(apps_box)
 
         self.handler = Handler(apps_box)

@@ -1,0 +1,2 @@
+depedencies:
+ - python-watchdog

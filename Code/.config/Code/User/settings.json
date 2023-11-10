@@ -19,5 +19,8 @@
     "prettier.configPath": "react-app/.prettierrc",
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
 }

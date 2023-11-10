@@ -38,9 +38,8 @@ function init_data() {
     rm "$config_path.tmp"
 }
 
-function display(){
+function spawn(){
     python "$HOME/.config/switcher/switcher.py" &
-    hyprctl dispatch movetoworkspacesilent 10,$switcher_id
 }
 
 function next() {
@@ -51,12 +50,21 @@ function next() {
 function move_to_current_workspace(){
     current_workspace=$(hyprctl activeworkspace | grep -oP '(?<=ID )\d+')
     hyprctl dispatch movetoworkspace $current_workspace,$switcher_id
+
+    active_class=$(hyprctl activewindow | grep -oP '(?<=class: )[^ ]*')
+    switcher_instance=$(hyprctl clients | grep $switcher_id)
+    if [[ "$active_class" != "$switcher_id" ]]; then
+        if [[ -z "$switcher_instance" ]]; then
+            spawn
+        else
+            hyprctl dispatch focuswindow $switcher_id
+        fi
+    fi
 }
 
 case "$1" in
     init)
         init_data
-        display
         ;;
     next)
         active_class=$(hyprctl activewindow | grep -oP '(?<=class: )[^ ]*')

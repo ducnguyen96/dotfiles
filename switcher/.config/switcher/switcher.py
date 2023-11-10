@@ -1,45 +1,35 @@
-import json
-from watchdog.events import FileSystemEventHandler
-from watchdog.observers import Observer
 from gi.repository import Gtk
-import gi
+import json
 import subprocess
+import gi
+import threading
 import time
+import os
+
 gi.require_version('Gtk', '4.0')
 
 config_path = "/home/d/.config/switcher/switcherrc"
 
 
-def debug(var):
-    subprocess.check_output(['notify-send', f'{var}{time.time()}'])
-
-
-class Handler(FileSystemEventHandler):
-    def __init__(self, apps_box) -> None:
-        super().__init__()
+class Handler:
+    def __init__(self, apps_box):
         self.apps_box = apps_box
         self.apps = []
 
         self.config = {}
+        self.last_modified_time = 0  # Added this line
         self.load_config()
-
-    def on_any_event(self, event):
-        if event.is_directory:
-            return None
-
-        elif event.event_type == 'modified':
-            self.load_config()
 
     def load_config(self):
         try:
             modified_config = json.load(open(config_path))
             if modified_config != self.config:
                 self.on_config_changed(modified_config)
-        except:
-            pass
+        except Exception as e:
+            print(f"Error loading config: {e}")
 
     def on_config_changed(self, modified_config):
-        if self.config:
+        if self.config and ' '.join(self.config['icons']) == modified_config['icons']:
             self.config['index'] = modified_config['index']
             self.on_index_changed()
         else:
@@ -90,39 +80,51 @@ class Handler(FileSystemEventHandler):
             # append to apps_box
             self.apps_box.append(app)
             self.apps.append(app)
-        pass
 
 
-class Watcher:
-    def __init__(self, apps_box):
-        self.observer = Observer()
-        self.apps_box = apps_box
+class PollingWatcher:
+    def __init__(self, handler):
+        self.handler = handler
+        self.stop_event = threading.Event()
 
-    def run(self):
-        event_handler = Handler(self.apps_box)
-        self.observer.schedule(
-            event_handler, config_path, recursive=True)
-        self.observer.start()
+    def poll_file_changes(self):
+        while not self.stop_event.is_set():
+            try:
+                modified_time = os.path.getmtime(config_path)
+                if modified_time != self.handler.last_modified_time:
+                    self.handler.load_config()
+                    self.handler.last_modified_time = modified_time
+            except Exception as e:
+                print(f"Error polling file changes: {e}")
+
+            time.sleep(0.1)  # Poll every 0.3 second
+
+    def start(self):
+        threading.Thread(target=self.poll_file_changes).start()
+
+    def stop(self):
+        self.stop_event.set()
 
 
 class MainWindow(Gtk.ApplicationWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        apps_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        self.set_child(apps_box)
-
         eck = Gtk.EventControllerKey.new()
+        eck.connect("key-pressed", self.on_key_pressed)
         eck.connect("key-released", self.on_key_released)
         self.add_controller(eck)
 
-        watcher = Watcher(apps_box)
-        watcher.run()
-
     def focus_current(self):
         config = json.load(open(config_path))
-        subprocess.check_output(
-            ['hyprctl', 'dispatch', 'focuswindow', f'address:{config["windows"][config["index"]]["address"]}'])
+        index = config['index']
+        windows = config['windows']
+        try:
+            window = windows[index]
+            subprocess.check_output(
+                ['hyprctl', 'dispatch', 'focuswindow', f'address:{window["address"]}'])
+        except Exception as e:
+            print(f"Error focusing current window: {e}")
 
     def on_key_pressed(self, controller, keyval, keycode, state):
         if keycode == 36:
@@ -141,12 +143,28 @@ class WindowSwitcher(Gtk.Application):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.connect('activate', self.on_activate)
+        self.handler = None
+        self.polling_watcher = None
 
     def on_activate(self, app):
         self.win = MainWindow(application=app)
         self.win.set_resizable(False)
         self.win.present()
 
+        apps_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        self.win.set_child(apps_box)
 
-app = WindowSwitcher(application_id="com.switcher.hypr")
-app.run()
+        self.handler = Handler(apps_box)
+        self.polling_watcher = PollingWatcher(self.handler)
+        self.polling_watcher.start()
+
+    def on_shutdown(self, *args):
+        if self.polling_watcher:
+            self.polling_watcher.stop()
+
+
+if __name__ == "__main__":
+    app = WindowSwitcher(application_id="com.switcher.hypr")
+    app.connect("shutdown", app.on_shutdown)
+    app.run()
+    Gtk.main()

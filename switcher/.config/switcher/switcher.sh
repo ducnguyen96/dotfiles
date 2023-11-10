@@ -50,14 +50,15 @@ function next() {
 function move_to_current_workspace(){
     current_workspace=$(hyprctl activeworkspace | grep -oP '(?<=ID )\d+')
     hyprctl dispatch movetoworkspace $current_workspace,$switcher_id
+    hyprctl dispatch focuswindow $switcher_id
 
-    active_class=$(hyprctl activewindow | grep -oP '(?<=class: )[^ ]*')
+    # active_class=$(hyprctl activewindow | grep -oP '(?<=class: )[^ ]*')
     switcher_instance=$(hyprctl clients | grep $switcher_id)
-    if [[ "$active_class" != "$switcher_id" ]]; then
+    if [[ "$activ e_class" != "$switcher_id" ]]; then
         if [[ -z "$switcher_instance" ]]; then
             spawn
-        else
-            hyprctl dispatch focuswindow $switcher_id
+        # else
+        #     hyprctl dispatch focuswindow $switcher_id
         fi
     fi
 }
